@@ -5,13 +5,18 @@ var connection;
 
 
 	// DB is local on localhost
-connection = mysql.createConnection({
-		port: 3306,
-		host: 'localhost',
-		user: 'root',
-		password: '26400918a',
-		database: 'burgers_db'
-})
+	if (process.env.PORT) {
+		connection = mysql.createConnection(process.env.PORT);
+	} else {
+		// DB is local on localhost
+		connection = mysql.createConnection({
+			port: 3306,
+			host: 'localhost',
+			user: 'root',
+			password: '26400918a',
+			database: 'burgers_db'
+		})
+	};
 
 // Make the connection to MySQL
 connection.connect(function(err) {
